@@ -6,6 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'Authentication/sign_up_widget.dart';
 import 'Home/home_page.dart';
+import 'core/common/utils.dart';
+import 'core/local/local.dart';
+import 'core/pallette/pallete.dart';
 
 
 class ChatScreen extends StatefulWidget {

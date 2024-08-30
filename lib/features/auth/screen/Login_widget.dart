@@ -1,40 +1,44 @@
 import 'package:chat_app/Authentication/sign_up_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Home/home_page.dart';
+import '../../../Home/home_page.dart';
+import '../controller/auth_controller.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key ?key}) : super(key: key);
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
-class _LoginPageState extends State<LoginPage> {
-  Future Login() async {
-    if(username!.text!=''&&password!.text!=''){
-
-      final user = await auth.signInWithEmailAndPassword(
-        email: username!.text,
-        password: password!.text,
-      );
-      if (user == null) {
-        return;
-      }else{
-        SharedPreferences preferences =await SharedPreferences.getInstance();
-        preferences.setString('email', username!.text,);
-        preferences.setString('password', password!.text,);
-        currentuserId=user.user!.uid;
-        await Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-              (r) => false,
-        );
-      }
-    }
-
-  }
+class _LoginPageState extends ConsumerState<LoginPage> {
+  final RegExp emailvalidator =
+  RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+  // Future Login() async {
+  //   if(username!.text!=''&&password!.text!=''){
+  //
+  //     final user = await auth.signInWithEmailAndPassword(
+  //       email: username!.text,
+  //       password: password!.text,
+  //     );
+  //     if (user == null) {
+  //       return;
+  //     }else{
+  //       SharedPreferences preferences =await SharedPreferences.getInstance();
+  //       preferences.setString('email', username!.text,);
+  //       preferences.setString('password', password!.text,);
+  //       currentuserId=user.user!.uid;
+  //       await Navigator.pushAndRemoveUntil(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => HomePage(),
+  //         ),
+  //             (r) => false,
+  //       );
+  //     }
+  //   }
+  //
+  // }
   bool ?passwordVisibility1;
   TextEditingController ?username;
   TextEditingController ?password;
@@ -143,7 +147,17 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       InkWell(
                         onTap: () async {
-                          Login();
+                          if (username?.text!='' && password!.text!='') {
+                            ref.read(authControllerProvider.notifier)
+                                .loginUser(username!.text
+
+                                .trim(),
+                                password!
+                                    .text
+                                    .trim(),
+                                context);
+                          }
+                          // Login();
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 40,right: 40,top: 20),

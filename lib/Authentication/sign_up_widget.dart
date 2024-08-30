@@ -5,30 +5,32 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 import '../Home/home_page.dart';
+import '../core/common/utils.dart';
+import '../core/local/local.dart';
 import '../main.dart';
-import 'Login_widget.dart';
-String currentuserId='';
+import '../features/auth/screen/Login_widget.dart';
 
-void showUploadMessage(BuildContext context, String message,
-    {bool showLoading = false}) {
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(
-      SnackBar(
-        duration: showLoading?Duration(minutes: 30):Duration(seconds: 4),
-        content: Row(
-          children: [
-            if (showLoading)
-              Padding(
-                padding: EdgeInsets.only(right: 10.0),
-                child: CircularProgressIndicator(),
-              ),
-            Text(message,style: GoogleFonts.poppins(color: Colors.blue),),
-          ],
-        ),
-      ),
-    );
-}
+
+// void showUploadMessage(BuildContext context, String message,
+//     {bool showLoading = false}) {
+//   ScaffoldMessenger.of(context)
+//     ..hideCurrentSnackBar()
+//     ..showSnackBar(
+//       SnackBar(
+//         duration: showLoading?Duration(minutes: 30):Duration(seconds: 4),
+//         content: Row(
+//           children: [
+//             if (showLoading)
+//               Padding(
+//                 padding: EdgeInsets.only(right: 10.0),
+//                 child: CircularProgressIndicator(),
+//               ),
+//             Text(message,style: GoogleFonts.poppins(color: Colors.blue),),
+//           ],
+//         ),
+//       ),
+//     );
+// }
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 

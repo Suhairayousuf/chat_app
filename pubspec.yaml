@@ -42,8 +42,12 @@ dependencies:
 
   #  firebase_core_platform_interface: ^4.5.1
   cloud_firestore:
+  flutter_riverpod: ^2.3.6
+  fpdart: ^0.6.0
   firebase_core:
   firebase_auth:
+  lottie:
+  flutter_svg:
 dependency_overrides:
   firebase_core_platform_interface: 4.5.1
 
@@ -70,8 +74,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
